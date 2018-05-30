@@ -12,8 +12,6 @@
         v-card-text {{item.text}}
         v-btn(color="primary" flat :to="'/ansower/'+ item.id")|Antwort
       v-btn(color="primary" large to="/Englisch")|new Quistion
-
-
 </template>
 <script>
 
