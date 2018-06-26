@@ -15,20 +15,24 @@ export default {
       name: 'Englisch',
       data(){
         return{
-         input: ''
+         input: '',
+         category: 'freizeit',
+         language: 'english'
         }
       },
       methods:{
         setFrage() {
          var vm = this;
         this.axios.post('api/quistions/create',{
-          text : vm.input
+          text : vm.input,
+          category:vm.category,
+          language:vm.language
         })
           .then(response => {
-          console.log(response);
+              console.log(response); 
           })
           .catch(e => {
-        console.log('errors')
+              console.error(e);
           })
       }
     }

@@ -12,9 +12,9 @@ class quistionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($language)
     {
-        return quistion::all();
+        return quistion::all()->where('language',$language);
     }
 
     /**
@@ -26,6 +26,8 @@ class quistionController extends Controller
     {
         $newQu = new quistion();
         $newQu->text = $request->text;
+        $newQu->category=$request->category;
+        $newQu->language=$request->language;
         $newQu->save();
         return $newQu;
     }

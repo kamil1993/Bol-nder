@@ -5,7 +5,6 @@ import Deutsch from '../components/Deutsch.vue'
 import ansower from '../components/ansower.vue'
 import viewEnglisch from '../components/viewEnglisch.vue'
 import viewDeutsch from '../components/viewDeutsch.vue'
-import antwort from '../components/antwort.vue'
 Vue.use(Router)
 
 
@@ -37,11 +36,6 @@ export default new Router({
       path: '/',
       name: 'viewDeutsch',
       component:viewDeutsch
-    },
-    {
-      path: '/antwort/:id',
-      name: 'antwort',
-      component:antwort
     }
   ],
   mode:'history'

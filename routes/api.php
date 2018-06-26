@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/quistions', 'quistionController@index');
+Route::get('/quistionsOfLanguage/{language}', 'quistionController@index');
 Route::post('/quistions/create', 'quistionController@create');
 Route::get('/getQuistion/{id}', 'quistionController@show');
 Route::post('/createAnsower', 'ansowerController@create');

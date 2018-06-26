@@ -1,37 +1,92 @@
 <template lang="pug">
- v-container
   v-layout(row wrap)
-    v-flex(md2 lg2 xs2  )
-      v-navigation-drawer( stateless permanent value="true" class="blue lighten-3" )
-        v-list 
-          v-list-tile(v-for="item in listItems" :key="item.title")
-            v-list-tile-title(v-text="item.title" )
-    v-flex(md10 lg10 xs10  )
-      v-card(color="grey lighten-2" v-for="item in res" :key="item.id")
-        <span class="grey--text">published at :{{item.created_at}}</span><br>
-        v-card-text {{item.text}}
-        v-btn(color="primary" flat :to="'/ansower/'+ item.id")|Antwort
-      v-btn(color="primary" large to="/Englisch")|new Quistion
+    v-flex(md10 lg10 xs12 )
+      v-layout(row wrap justify-end)       
+        v-flex(md10 lg10 xs10 )          
+          v-text-field(
+              v-model="input"                
+              label="bitte geben Sie ihre Frage ein!"
+              class="input-group--focused"
+              multi-line                                                  
+            )         
+        v-flex(md10 lg10 xs10 )
+          v-layout(row)
+            v-flex(md3 lg3 xs3)
+              v-btn(color="primary" large @click="setFrage()" )|schicken 
+            v-flex(md7 lg7 xs7)
+              v-select(
+              :items="selectItems"
+              v-model="selectedCategory"
+              label="Select Category"
+              class="input-group--focused"
+              item-value="text",
+              required
+              :error-messages="['Please select an option']"
+              )
+      v-layout(row wrap justify-end)
+        v-flex(md10 lg10 xs10 )
+          v-card( hover class="mb-3" v-for="item in res" :key="item.id" color="grey darken-4")
+            span(class="grey--text") veröffentlicht am : {{item.created_at}}
+            v-card-text(class="white--text") {{item.text}}
+            v-layout(row)
+              v-flex(md5 lg5 xs6 )
+                v-btn(round color="primary") {{item.category}}
+              v-flex(md5 lg5 xs6 )
+                v-btn(round color="primary" :to="'/ansower/'+ item.id" )|Antwort            
 </template>
 <script>
 
 export default {
-      name:'viewEnglisch',
+      
       data(){
         return{
-          res :[],
-          listItems:[{title :'Free Time'},{title :'Study'},{title :'etc..'}]
+          res :[],          
+          selectItems:['Free Time','Study','etc..'],
+          selectedCategory:'',
+          input:'',
+          language:'englisch'
         }
       },
     mounted() {
-     var vm = this;
-    this.axios.get('api/quistions')
-    .then(response => {
-      vm.res = response.data;
-    })
-    .catch(e => {
-      console.log('errors')
-    })
+     this.fetchData();
+  },
+  computed : {
+    reversedArr() {
+      return this.res.slice().reverse();
+    }
+  },
+  methods:{
+    setFrage() {
+              var vm = this;
+              console.log(vm.selectedCategory);
+              this.axios.post('api/quistions/create',{
+                text : vm.input,
+                category:vm.selectedCategory,
+                language:vm.language
+              })
+                .then(response => {
+                    console.log(response); 
+                    this.fetchData();
+                    this.clean();
+                })
+                .catch(e => {
+                    console.error(e);
+                })
+      },
+      fetchData(){
+              var vm = this;      
+              this.axios.get('api/quistionsOfLanguage/'+vm.language)
+              .then(response => {
+                vm.res = response.data;
+              })
+              .catch(e => {
+                console.log('errors')
+              })
+            },
+            clean(){
+              this.selectedCategory=null;
+              this.input=null;
+            }
   }
 }
 </script>

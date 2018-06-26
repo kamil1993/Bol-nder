@@ -8,7 +8,7 @@ class quistion extends Model
 {
     public $table = "quistions";
     public function ansowers()
-{
-    return $this->hasMany(ansower::class);
-}
+    {
+        return $this->hasMany(ansower::class);
+    }
 }

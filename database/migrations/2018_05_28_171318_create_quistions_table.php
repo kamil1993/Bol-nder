@@ -17,6 +17,8 @@ class CreateQuistionsTable extends Migration
         Schema::create('quistions', function (Blueprint $table) {
             $table->increments('id');
             $table->text('text');
+            $table->string('category');
+            $table->string('language');
             $table->timestamps();
         });
     }
