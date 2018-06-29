@@ -1,8 +1,7 @@
 <template>
   <v-app id="inspire"  >
      <v-navigation-drawer
-      v-model="drawer"
-      
+      v-model="drawer"      
       clipped
       class="grey lighten-4"
       app
@@ -29,12 +28,12 @@
       </v-navigation-drawer>
     <v-toolbar app fixed  clipped-left  color="black" >
       <v-toolbar-side-icon @click.stop="drawer = !drawer" flat color="primary"></v-toolbar-side-icon>
-      <v-btn color="primary" flat to="/">Home</v-btn>
+      <v-btn color="primary" flat to="/">Deutsch</v-btn>
       <v-btn color="primary" flat to="/viewEnglisch">Englisch</v-btn>
     </v-toolbar>
     <v-content id="cont">
       <v-container >
-        <router-view>
+        <router-view :key="$route.fullPath">
           
         </router-view>
       </v-container>

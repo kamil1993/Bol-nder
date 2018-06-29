@@ -17,6 +17,11 @@ class quistionController extends Controller
         return quistion::all()->where('language',$language);
     }
 
+    public function cat($category)
+    {
+        return quistion::all()->where('category',$category);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

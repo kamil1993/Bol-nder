@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/quistionsOfLanguage/{language}', 'quistionController@index');
+Route::get('/quistionsOfLanguageFromCategory/{category}', 'quistionController@cat');
 Route::post('/quistions/create', 'quistionController@create');
 Route::get('/getQuistion/{id}', 'quistionController@show');
 Route::post('/createAnsower', 'ansowerController@create');

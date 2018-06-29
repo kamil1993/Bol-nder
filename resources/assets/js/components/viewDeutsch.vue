@@ -1,6 +1,11 @@
 <template lang="pug">
   v-layout(row wrap)
-    v-flex(md10 lg10 xs12 )
+    v-flex(md12 lg12 xs12)
+      v-toolbar(color="primary" dark)
+       v-btn(flat :to="'/kategorie/'+ freizeit") freizeit
+       v-btn(flat :to="'/kategorie/'+ studium") Studium
+       v-btn(flat :to="'/kategorie/'+ anders") anders
+    v-flex(md10 lg10 xs12)      
       v-layout(row wrap justify-end)       
         v-flex(md10 lg10 xs10 )          
           v-text-field(
@@ -41,10 +46,13 @@ export default {
       data(){
         return{
           res :[],          
-          selectItems:['Free Time','Study','etc..'],
+          selectItems:['freizeit','studium','anders'],
           selectedCategory:'',
           input:'',
-          language:'deutsch'
+          language:'deutsch',
+          freizeit: 'freizeit',
+          studium: 'studium',
+          anders: 'anders'
         }
       },
     mounted() {
@@ -52,7 +60,7 @@ export default {
   },
   computed : {
     reversedArr() {
-        return res.slice().reverse();
+        return this.res.slice().reverse();
     }
   },
   methods:{
@@ -77,7 +85,7 @@ export default {
         var vm = this;      
         this.axios.get('api/quistionsOfLanguage/'+vm.language)
         .then(response => {
-          vm.res = response.data;          
+          vm.res = response.data;                   
         })
         .catch(e => {
            console.log('errors')

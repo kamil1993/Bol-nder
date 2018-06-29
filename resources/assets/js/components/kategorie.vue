@@ -1,11 +1,11 @@
 <template lang="pug">
-  v-layout(row wrap)
+ v-layout(row wrap)
     v-flex(md12 lg12 xs12)
-      v-toolbar(color="primary" dark )
-       v-btn(flat :to="'/category/'+ freeTime") Free time
-       v-btn(flat :to="'/category/'+ study") Study
-       v-btn(flat :to="'/category/'+ etc") etc..
-    v-flex(md10 lg10 xs12 )
+      v-toolbar(color="primary" dark)
+        v-btn(flat :to="'/kategorie/'+ freizeit") Freizeit
+        v-btn(flat :to="'/kategorie/'+ studium") Studium
+        v-btn(flat :to="'/kategorie/'+ anders") anders
+    v-flex(md10 lg10 xs12)      
       v-layout(row wrap justify-end)       
         v-flex(md10 lg10 xs10 )          
           v-text-field(
@@ -37,7 +37,7 @@
               v-flex(md5 lg5 xs6 )
                 v-btn(round color="primary") {{item.category}}
               v-flex(md5 lg5 xs6 )
-                v-btn(round color="primary" :to="'/ansower/'+ item.id" )|Antwort            
+                v-btn(round color="primary" :to="'/ansower/'+ item.id" )|Antwort
 </template>
 <script>
 
@@ -46,13 +46,14 @@ export default {
       data(){
         return{
           res :[],          
-          selectItems:['Free Time','Study','etc..'],
+          selectItems:['freizeit','studium','anders'],
           selectedCategory:'',
           input:'',
           language:'englisch',
-          freeTime:'Free time',
-          study:'Study',
-          etc:'etc..'
+          freizeit: 'freizeit',
+          studium: 'studium',
+          anders: 'anders',
+          category:this.$route.params.category,
         }
       },
     mounted() {
@@ -60,41 +61,41 @@ export default {
   },
   computed : {
     reversedArr() {
-      return this.res.slice().reverse();
+        return res.slice().reverse();
     }
   },
   methods:{
     setFrage() {
-              var vm = this;
-              console.log(vm.selectedCategory);
-              this.axios.post('api/quistions/create',{
-                text : vm.input,
-                category:vm.selectedCategory,
-                language:vm.language
-              })
-                .then(response => {
-                    console.log(response); 
-                    this.fetchData();
-                    this.clean();
-                })
-                .catch(e => {
-                    console.error(e);
-                })
+         var vm = this;         
+          this.axios.post('/api/quistions/create',{
+          text : vm.input,
+          category:vm.selectedCategory,
+          language:vm.language
+        })
+          .then(response => {
+              console.log(response); 
+              this.fetchData();
+              this.clean();
+          })
+          .catch(e => {
+              console.error(e);
+          })
       },
       fetchData(){
-              var vm = this;      
-              this.axios.get('api/quistionsOfLanguage/'+vm.language)
-              .then(response => {
-                vm.res = response.data;
-              })
-              .catch(e => {
-                console.log('errors')
-              })
-            },
-            clean(){
-              this.selectedCategory=null;
-              this.input=null;
-            }
+        var vm = this;      
+        this.axios.get('/api/quistionsOfLanguageFromCategory/'+vm.category)
+        .then(response => {
+            console.log(response.data);
+          vm.res = response.data;                   
+        })
+        .catch(e => {
+           console.log('errors')
+        })
+  },
+  clean(){
+    this.selectedCategory=null;
+    this.input=null;
+    }
   }
 }
 </script>
