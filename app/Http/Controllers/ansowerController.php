@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ansower;
+use Illuminate\Support\Facades\DB;
 
 class ansowerController extends Controller
 {
@@ -14,7 +15,11 @@ class ansowerController extends Controller
      */
     public function index($id)
     {
-        return ansower::all()->where('quistion_id',$id);
+        $res=DB::table('ansowers') 
+        ->where('quistion_id',$id)
+         ->orderBy('id','desc')
+         ->get();
+         return $res;         
     }
 
     /**

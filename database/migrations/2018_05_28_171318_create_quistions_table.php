@@ -13,7 +13,8 @@ class CreateQuistionsTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {   
+        // hier wird eine Tabelle und die benötigten felder in der daten Bank defeniert 
         Schema::create('quistions', function (Blueprint $table) {
             $table->increments('id');
             $table->text('text');

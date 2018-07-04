@@ -1,4 +1,5 @@
 <template>
+<!-- hier wird das sidebar defeniert -->
   <v-app id="inspire"  >
      <v-navigation-drawer
       v-model="drawer"      
@@ -8,7 +9,7 @@
     >
 
       <v-list dense class="grey lighten-4">
-        <v-list-tile>
+         <v-list-tile @click="toHomeView()">
           <v-list-tile-action>
             <v-icon>home</v-icon>
           </v-list-tile-action>
@@ -16,39 +17,54 @@
             <v-list-tile-title>Home</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile>
+        <v-list-tile @click="toDeutschView()">
           <v-list-tile-action>
-            <v-icon>contact_mail</v-icon>
+            <v-icon>arrow_forward</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Contact</v-list-tile-title>
+            <v-list-tile-title>Deutsch</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>         
+        <v-list-tile @click="toEnglischView()">
+          <v-list-tile-action>
+            <v-icon>arrow_forward</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Englisch</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="toAboutView()">
+          <v-list-tile-action>
+            <v-icon>help</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>about</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
       </v-navigation-drawer>
-    <v-toolbar app fixed  clipped-left  color="black" >
+
+    <!-- toolbar und sidebar durch icon zu zueigen  -->
+    <v-toolbar app fixed  clipped-left  color="black" height="50">
       <v-toolbar-side-icon @click.stop="drawer = !drawer" flat color="primary"></v-toolbar-side-icon>
-      <v-btn color="primary" flat to="/">Deutsch</v-btn>
+      <v-btn color="primary" flat to="/">Home</v-btn>
+      <v-btn color="primary" flat to="/viewDeutsch">Deutsch</v-btn>
       <v-btn color="primary" flat to="/viewEnglisch">Englisch</v-btn>
+      <v-spacer></v-spacer>      
+      <img src="./logo.jpg" height="45" width="50"/>>
     </v-toolbar>
-    <v-content id="cont">
+    <!-- hier werden alle komponenten gezeigt -->
+    <v-content >
       <v-container >
         <router-view :key="$route.fullPath">
-          
+          <!-- hier werden die komponenten die durch den router aufgerufen werden angezeigt werden -->
         </router-view>
       </v-container>
     </v-content>
-    <v-footer height="80" class="black" app clipped>
-      <v-layout row wrap justify-center>
-        <v-btn
-          v-for="link in links"
-          :key="link"
-          color="primary"
-          flat
-        >
-        {{link}}
-        </v-btn>
-      <v-flex xs12 py-3 text-xs-center cyan--text>
+    <!-- footer -->
+    <v-footer height="20" class="black" app clipped>
+      <v-layout row wrap justify-center>      
+      <v-flex xs12 py-3 text-xs-left cyan--text>
         &copy;2018 — <strong >Boländer</strong>
       </v-flex>
     </v-layout>
@@ -64,6 +80,21 @@
     }),
     props: {
       source: String
+    },
+    methods:{
+      toEnglischView(){
+        this.$router.push('/viewEnglisch');//die gewünschte komponente zeigen
+      },
+       toDeutschView(){
+        this.$router.push('/viewDeutsch');
+      },
+       toAboutView(){
+        this.$router.push('/about');
+      }
+      ,
+       toHomeView(){
+        this.$router.push('/');
+      }
     }
   }
 </script>
@@ -73,6 +104,7 @@
   margin: 0%;
   max-width: 2000px;
 }
+
 
 
 </style>

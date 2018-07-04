@@ -1,7 +1,7 @@
 <template lang="pug">
  v-layout(row wrap)
     v-flex(md12 lg12 xs12)
-      v-toolbar(color="primary" dark)
+      v-toolbar(color="primary" dark height="40")
         v-btn(flat :to="'/category/'+ freeTime") Free time
         v-btn(flat :to="'/category/'+ study") Study
         v-btn(flat :to="'/category/'+ etc") etc..
@@ -10,9 +10,11 @@
         v-flex(md10 lg10 xs10 )          
           v-text-field(
               v-model="input"                
-              label="bitte geben Sie ihre Frage ein!"
+              label="please write your quistion !"
               class="input-group--focused"
-              multi-line                                                  
+              multi-line   
+              placeholder="what do you want to ask ??" 
+              name="input-1-3"                                               
             )         
         v-flex(md10 lg10 xs10 )
           v-layout(row)
@@ -30,12 +32,10 @@
               )
       v-layout(row wrap justify-end)
         v-flex(md10 lg10 xs10 )
-          v-card( hover class="mb-3" v-for="item in res" :key="item.id" color="grey darken-4")
+          v-card( hover class="mb-3" v-for="item in res" :key="item.id" color="blue-grey darken-2")
             span(class="grey--text") veröffentlicht am : {{item.created_at}}
             v-card-text(class="white--text") {{item.text}}
-            v-layout(row)
-              v-flex(md5 lg5 xs6 )
-                v-btn(round color="primary") {{item.category}}
+            v-layout(row)              
               v-flex(md5 lg5 xs6 )
                 v-btn(round color="primary" :to="'/ansower/'+ item.id" )|Antwort
 </template>

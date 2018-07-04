@@ -2,17 +2,8 @@
 
 use Illuminate\Http\Request;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
+// hier werden die API routs defeniert,und der request wird an den zuständigen Controller weitergeleitet,und dabei eine Action
+//also eine Methode von diesem Controller aufgerufen wird
 Route::get('/quistionsOfLanguage/{language}', 'quistionController@index');
 Route::get('/quistionsOfLanguageFromCategory/{category}', 'quistionController@cat');
 Route::post('/quistions/create', 'quistionController@create');

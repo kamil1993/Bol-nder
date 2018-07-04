@@ -6,7 +6,8 @@ import 'vuetify/dist/vuetify.min.css'
 import layout from './components/layout.vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
- 
+ //axios ,ein http client-Library ,mit dem man abfragen an den Server schicken kann
+//hier wird vue über der runtergeladene Moduls  benachrichtigt,die wir brauchen
 Vue.use(Vuetify)
 Vue.use(VueAxios ,axios)
 
@@ -15,12 +16,15 @@ Vue.use(store)
 
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
+/* hier wird das Vue Instance definiert  */
 new Vue({
+  // das root Element (der div aus index.html) defenieren
   el: '#app',
-  router,
+  //hier werden die Modules registriert 
+  router, 
   store: store ,
+  //hier ist unser Masterpage
   components:{layout},
-   
+   //masterpage wird gerendert 
   render: h => h(layout)
 })

@@ -1,28 +1,28 @@
 <template lang="pug">
-  v-layout(row wrap)
-    v-flex(md10 lg10 xs12 )  
-      v-layout(row wrap justify-end)       
-          v-flex(md10 lg10 xs10 )  
-            v-card
-              v-text-field(
-              v-model="input"
-              name=""
-              label="bitte geben Sie ihre Antwort!"
-              class="input-group--focused"
-              multi-line
-            )
-            v-btn(color="primary" large @click="setAntwort()")|add ansower
-      v-layout(row wrap justify-end)
-        v-flex(md10 lg10 xs10 )
-          v-card( hover class="mt-3"  color="grey darken-4")
+  v-layout(row wrap)    
+      v-layout(row wrap justify-center)
+        v-flex(md10 lg10 xs10 class="mb-3")
+          v-card( hover class="mt-3"  color="blue-grey darken-2")
             span(class="grey--text") veröffentlicht am : {{quistion.created_at}}
                   v-card-text(class="white--text") {{quistion.text}}
           v-flex(md10 lg10 xs10)
             v-layout(row wrap justify-center)
               v-flex(md10 lg10 xs10)
-                v-card( color="grey darken-4" class="mt-3" v-for="item in ansowers" :key="item.id")
+                v-card( color="blue-grey darken-2" class="mt-3" v-for="item in ansowers" :key="item.id")
                   <span class="grey--text">published at :{{item.created_at}}</span><br>
                   v-card-text(class="white--text") {{item.text}}
+          v-flex(md10 lg10 xs10 justify-center class="mt-3")  
+            v-layout(row wrap justify-center)       
+                v-flex(md10 lg10 xs10 )  
+                  v-card
+                    v-text-field(
+                    v-model="input"
+                    name=""
+                    label="bitte geben Sie ihre Antwort!"
+                    class="input-group--focused"
+                    multi-line
+                  )
+                  v-btn(color="primary" large @click="setAntwort()")|add ansower
    
 </template>
 <script>

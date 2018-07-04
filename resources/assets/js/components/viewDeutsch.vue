@@ -1,19 +1,21 @@
 <template lang="pug">
   v-layout(row wrap)
-    v-flex(md12 lg12 xs12)
-      v-toolbar(color="primary" dark)
+    v-flex(md12 lg12 xs12 )
+      v-toolbar(color="primary" dark height="40")
        v-btn(flat :to="'/kategorie/'+ freizeit") freizeit
        v-btn(flat :to="'/kategorie/'+ studium") Studium
-       v-btn(flat :to="'/kategorie/'+ anders") anders
-    v-flex(md10 lg10 xs12)      
+       v-btn(flat :to="'/kategorie/'+ anders") anders    
+    v-flex(md8 lg8 xs8 class="mt-3")      
       v-layout(row wrap justify-end)       
         v-flex(md10 lg10 xs10 )          
           v-text-field(
               v-model="input"                
               label="bitte geben Sie ihre Frage ein!"
               class="input-group--focused"
-              multi-line                                                  
-            )         
+              multi-line 
+              placeholder="was möchten Sie Fragen ??" 
+              name="input-1-3"                                                             
+            )                   
         v-flex(md10 lg10 xs10 )
           v-layout(row)
             v-flex(md3 lg3 xs3)
@@ -22,22 +24,22 @@
               v-select(
               :items="selectItems"
               v-model="selectedCategory"
-              label="Select Category"
+              label="wähle kategorie aus"
               class="input-group--focused"
               item-value="text",
               required
-              :error-messages="['Please select an option']"
+              :error-messages="['bitte erst auswählen']"
               )
-      v-layout(row wrap justify-end)
-        v-flex(md10 lg10 xs10 )
-          v-card( hover class="mb-3" v-for="item in res" :key="item.id" color="grey darken-4")
-            span(class="grey--text") veröffentlicht am : {{item.created_at}}
-            v-card-text(class="white--text") {{item.text}}
-            v-layout(row)
-              v-flex(md5 lg5 xs6 )
-                v-btn(round color="primary") {{item.category}}
-              v-flex(md5 lg5 xs6 )
-                v-btn(round color="primary" :to="'/ansower/'+ item.id" )|Antwort            
+        v-layout(row wrap justify-end)
+          v-flex(md10 lg10 xs10 )
+            v-card( hover class="mb-3" v-for="item in res" :key="item.id" color="blue-grey darken-2")
+              span(class="grey--text") veröffentlicht am : {{item.created_at}}
+              v-card-text(class="white--text") {{item.text}}
+              v-layout(row)
+                v-flex(md5 lg5 xs6 )
+                  v-btn(round color="primary" :to="'/kategorie/'+ item.category") {{item.category}}
+                v-flex(md5 lg5 xs6 )
+                  v-btn(round color="primary" :to="'/ansower/'+ item.id" )|Antwort            
 </template>
 <script>
 
@@ -85,6 +87,7 @@ export default {
         var vm = this;      
         this.axios.get('api/quistionsOfLanguage/'+vm.language)
         .then(response => {
+          console.log(response.data);
           vm.res = response.data;                   
         })
         .catch(e => {
@@ -103,5 +106,7 @@ export default {
   padding: 0%;
   margin: 0%;
 }
+
+
 </style>
 

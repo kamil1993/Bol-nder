@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\quistion;
+use Illuminate\Support\Facades\DB;
 
 class quistionController extends Controller
 {
@@ -14,12 +15,23 @@ class quistionController extends Controller
      */
     public function index($language)
     {
-        return quistion::all()->where('language',$language);
+        
+        $res=DB::table('quistions')
+        ->where('language',$language)
+         ->orderBy('id','desc')
+         ->get();
+         return $res; 
     }
 
     public function cat($category)
     {
-        return quistion::all()->where('category',$category);
+       // return quistion::all()->where('category',$category);
+        $res=DB::table('quistions')
+        ->where('category',$category)
+         ->orderBy('id','desc')
+         ->get();
+         return $res; 
+        
     }
 
     /**

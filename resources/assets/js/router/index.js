@@ -1,31 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Englisch from '../components/Englisch.vue'
-import Deutsch from '../components/Deutsch.vue'
+
 import ansower from '../components/ansower.vue'
 import viewEnglisch from '../components/viewEnglisch.vue'
 import viewDeutsch from '../components/viewDeutsch.vue'
 import category from '../components/category.vue'
 import kategorie from '../components/kategorie.vue'
+import about from '../components/about.vue'
+import wilcomePage from '../components/wilcomePage.vue'
 Vue.use(Router)
 
 
-
+// hierwerden die Komponenten importiert , und dann als routs defeniert
 export default new Router({
   routes: [
+    
     {
-      path: '/Englisch',
-      name: 'Englisch',
-      component: Englisch
-    },
-    {
-      path: '/Deutsch',
-      name: 'Deutsch',
-      component:Deutsch
-    }
-    ,
-    {
-      path: '/ansower/:id',
+      path: '/ansower/:id', //hier wird ein parameter verlangt,damit man weiss um welche frage es sich handelt ,und dann die frage aus den datenbank  zu fetchen 
       name: 'ansower',
       component:ansower
     },
@@ -35,7 +26,7 @@ export default new Router({
       component:viewEnglisch
     },
     {
-      path: '/',
+      path: '/viewDeutsch',
       name: 'viewDeutsch',
       component:viewDeutsch
     },
@@ -48,6 +39,16 @@ export default new Router({
       path: '/kategorie/:category',
       name: 'kategorie',
       component:kategorie
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component:about
+    },
+    {
+      path: '/',
+      name: '/',
+      component:wilcomePage
     }
   ],
   mode:'history'
