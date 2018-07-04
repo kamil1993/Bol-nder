@@ -7,7 +7,7 @@ import layout from './components/layout.vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
  //axios ,ein http client-Library ,mit dem man abfragen an den Server schicken kann
-//hier wird vue über der runtergeladene Moduls  benachrichtigt,die wir brauchen
+//hier wird vue über die benötigten Moduls  benachrichtigt,die wir brauchen
 Vue.use(Vuetify)
 Vue.use(VueAxios ,axios)
 

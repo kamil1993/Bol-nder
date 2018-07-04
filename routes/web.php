@@ -1,6 +1,6 @@
 <?php
 
-//hier wird die index.html datei als response zurückgegeben
+//hier wird die index datei als response zurückgegeben
 
 Route::any('{all}', function () {
     return view('index');

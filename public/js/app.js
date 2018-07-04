@@ -12383,7 +12383,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 //axios ,ein http client-Library ,mit dem man abfragen an den Server schicken kann
-//hier wird vue über der runtergeladene Moduls  benachrichtigt,die wir brauchen
+//hier wird vue über die benötigten Moduls  benachrichtigt,die wir brauchen
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vuetify___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_7_vue_axios___default.a, __WEBPACK_IMPORTED_MODULE_6_axios___default.a);
 
